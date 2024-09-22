@@ -105,10 +105,16 @@ function main(){
       python3_path="$(which python3)"
       echo "python2_path=$python2_path"
       echo "python3_path=$python3_path"
-      nexe_part_1_cmd="nexe --build --verbose --no-mangle --target=$nexe_target --make=-j$cpu_core_count"
+      nexe_part_1_cmd="nexe --build --verbose --no-mangle --target=$nexe_target --make=-j$cpu_core_count --flags=--max-old-space-size=8192"
       nexe_part_3_cmd="-o $nexe_no_mangle_path '$repo_dir/index.js'"
 
-      echo "console.log('TEST NEXE SCRIPT'); console.log(process.version); var os = require('os'); console.log('os.userInfo() =', os.userInfo());" > "$repo_dir/index.js"
+      echo "var v8 = require('v8');
+var os = require('os');
+var correction = 48 * 1024 * 1024;
+var hypothesis = (v8.getHepaStatistics().heap_size_limit - correction) / 1024 / 1024;
+console.log('getHepaStatistics().heap_size_limit', hypothesis);
+console.log(process.version);
+console.log('os.userInfo() =', os.userInfo());" > "$repo_dir/index.js"
       echo "Building $nexe_no_mangle_name (python 3)"
       nexe_cmd="$nexe_part_1_cmd --python=$python3_path $nexe_part_3_cmd"
       echo "  $nexe_cmd"
