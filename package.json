@@ -7,21 +7,6 @@
     "build": "tsc",
     "dev": "tsc -w"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Steven-Qiang/nexe_builds.git"
-  },
-  "keywords": [
-    "nexe",
-    "nodejs",
-    "cached"
-  ],
-  "author": "Urban Dynamics <www.Steven-Qiang.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Steven-Qiang/nexe_builds/issues"
-  },
-  "homepage": "https://github.com/Steven-Qiang/nexe_builds#readme",
   "dependencies": {
     "@octokit/request": "^6.2.8",
     "nexe": "4.0.0-rc.6"
