@@ -19,9 +19,8 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        # TODO: Bump to windows-latest once it can be solved how to install Python2
         # such that the Node.js build system can detect it.
-        os: [ubuntu-latest, windows-2019]
+        os: [ubuntu-latest, windows-latest]
         node_version: ['16.19.0', '18.14.0']
 
     steps:
