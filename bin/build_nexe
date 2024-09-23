@@ -109,10 +109,11 @@ function main(){
       echo "var v8 = require('v8');
 var os = require('os');
 var correction = 48 * 1024 * 1024;
-var hypothesis = (v8.getHepaStatistics().heap_size_limit - correction) / 1024 / 1024;
-console.log('getHepaStatistics().heap_size_limit', hypothesis);
+var hypothesis = (v8.getHeapStatistics().heap_size_limit - correction) / 1024 / 1024;
+console.log('getHeapStatistics().heap_size_limit', hypothesis);
 console.log(process.version);
-console.log('os.userInfo() =', os.userInfo());" > "$repo_dir/index.js"
+console.log('os.userInfo() =', os.userInfo());
+" > "$repo_dir/index.js"
       echo "Building $nexe_no_mangle_name (python 3)"
       nexe_cmd="$nexe_part_1_cmd --python=$python3_path $nexe_part_3_cmd"
       echo "  $nexe_cmd"
