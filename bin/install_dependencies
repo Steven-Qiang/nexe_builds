@@ -16,10 +16,10 @@ case "$os_env" in
         # on Windows Server 2022.
         choco install nasm
         set +x
-        ;;
+    ;;
     "linux")
         echo "Dependencies installed via container (skipping)"
-        ;;
+    ;;
     # Temporarily disabling as it was causing build to fail for unknown reasons
     #"mac")
     #    echo "Installing macos dependencies ..."
@@ -29,5 +29,5 @@ case "$os_env" in
     #    ;;
     *)
         echo "No dependencies to install for '$os_env'"
-        ;;
+    ;;
 esac

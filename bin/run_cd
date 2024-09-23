@@ -41,10 +41,10 @@ if [ "$os_env" = "linux" ]; then
         docker build --tag nexe_build_centos_7 "$script_dir/"
         echo "Creating container ..."
         docker create -t --name nexe_build_centos_7_container \
-            -v "$repo_dir/bin/:/nexe_build/bin/" -v "$repo_dir/dist/:/nexe_build/dist/" -v "$HOME/.ccache/:/root/.ccache/" \
-            --env IN_DOCKER=true --env CREATE_RELEASE --env NODE_VERSION --env GIT_COMMIT --env GITHUB_TOKEN \
-            nexe_build_centos_7 /nexe_build/bin/run_cd ||  true
-            # -v "$HOME/.nexe/:/root/.nexe/" \
+        -v "$repo_dir/bin/:/nexe_build/bin/" -v "$repo_dir/dist/:/nexe_build/dist/" -v "$HOME/.ccache/:/root/.ccache/" \
+        --env IN_DOCKER=true --env CREATE_RELEASE --env NODE_VERSION --env GIT_COMMIT --env GITHUB_TOKEN \
+        nexe_build_centos_7 /nexe_build/bin/run_cd ||  true
+        # -v "$HOME/.nexe/:/root/.nexe/" \
         docker cp "$repo_dir/package.json" "nexe_build_centos_7_container:/nexe_build/package.json"
         docker cp "$repo_dir/package-lock.json" "nexe_build_centos_7_container:/nexe_build/package-lock.json"
         docker cp "$repo_dir/.nvmrc" "nexe_build_centos_7_container:/nexe_build/.nvmrc"
@@ -77,16 +77,16 @@ case "$exit_code" in
     "0")
         echo "Detected that build is not needed!"
         exit 0
-        ;;
+    ;;
     "10")
         echo "Running: bin/install_dependencies"
         $script_dir/install_dependencies || exit 2
         echo "Running: bin/build_nexe build $NODE_VERSION"
         $script_dir/build_nexe build "$NODE_VERSION" || exit 3
         echo "Finished: bin/build_nexe build $NODE_VERSION"
-        ;;
+    ;;
     *)
         echo "Error exit code detected ($exit_code) from check_asset script! Crashing."
         exit 1
-        ;;
+    ;;
 esac
